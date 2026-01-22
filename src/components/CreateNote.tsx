@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 
 const Container = styled(Box)`
   & > * {
-    margin: 20px 20px 20px 0;
+    margin: 21px 20px 20px 0;
   }
   & > div > input[type="text"] {
     border-bottom: 1px solid #111111;
