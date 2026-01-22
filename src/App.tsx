@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CreateNote from "./components/CreateNote";
-import { Box } from "@mui/material";
-import Notes from "./components/Notes";
 import { NoteObj } from "./modals/note";
+import Notes from "./components/Notes";
 
 const App = () => {
   const [notes, setNotes] = useState<NoteObj[]>([]);
@@ -56,9 +55,9 @@ const App = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-[#f5f7fa] to-[#f0f4ff]">
       <Header />
-      <Box style={{ padding: "20px" }}>
+      <div className="flex gap-[60px] py-8 max-w-7xl mx-auto animate-fadeIn">
         <CreateNote addNotes={addNotes} />
         <Notes
           notes={notes}
@@ -70,8 +69,8 @@ const App = () => {
           editText={editText}
           handleSaveEdit={handleSaveEdit}
         />
-      </Box>
-    </>
+      </div>
+    </div>
   );
 };
 
