@@ -9,7 +9,7 @@ const Header: React.FC = () => {
           ✨ Sticky Notes
         </div>
         <div className="flex justify-end mt-2">
-          <AccountCircleIcon className="text-white text-5xl cursor-pointer" />
+          <AccountCircleIcon className="text-white cursor-pointer" />
         </div>
       </div>
     </header>

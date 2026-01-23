@@ -36,10 +36,14 @@ const NoteList: React.FC<iNoteProps> = ({
     handleCancelEdit();
   };
 
+  const handleSaveEditNote = (id: number) => {
+    handleSaveEdit(id);
+  };
+
   return (
     <div
       style={{ backgroundColor: note.color }}
-      className="relative w-72 rounded-xl overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 mb-3"
+      className="relative w-72  rounded-xl overflow-hidden bg-white border border-black/5 shadow-sm hover:shadow-2xl  transition-all duration-300 mb-3"
     >
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#667eea] to-[#764ba2]"></div>
       <div className="p-4 text-[#4b5563]">
@@ -47,6 +51,7 @@ const NoteList: React.FC<iNoteProps> = ({
           <div>
             <h3 className="text-sm font-semibold text-black mb-3">Edit Note</h3>
             <textarea
+              maxLength={50}
               value={editText}
               onChange={onValueChange}
               rows={3}
@@ -54,7 +59,7 @@ const NoteList: React.FC<iNoteProps> = ({
             />
             <div className="flex gap-2">
               <button
-                onClick={() => handleSaveEdit(note.id)}
+                onClick={() => handleSaveEditNote(note.id)}
                 className="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white font-semibold px-4 py-2 rounded text-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex items-center gap-1"
               >
                 ✓ Save
@@ -70,7 +75,7 @@ const NoteList: React.FC<iNoteProps> = ({
         ) : (
           <div>
             <h2 className="text-lg font-bold text-black mb-2">{note.title}</h2>
-            <p className="text-sm text-black leading-relaxed mb-3">
+            <p className="text-sm text-black leading-relaxed mb-3 overflow-hidden whitespace-nowrap text-ellipsis">
               {note.details}
             </p>
             <p className="text-xs text-black mb-4">{note.date}</p>

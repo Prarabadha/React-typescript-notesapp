@@ -37,7 +37,7 @@ const CreateNote: React.FC<createNoteProps> = ({ addNotes }) => {
   };
 
   return (
-    <div className="h-[400px] w-[350px] bg-gradient-to-br from-white to-[#f8f9ff] rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 p-7 max-w-md">
+    <div className="h-[400px] w-[350px] bg-gradient-to-br from-white to-[#f8f9ff] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-7 max-w-md">
       <div className="mb-4">
         <label className="text-sm font-semibold text-[#667eea] block mb-2">
           Note Title

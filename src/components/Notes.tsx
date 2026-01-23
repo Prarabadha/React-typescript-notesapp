@@ -12,6 +12,7 @@ interface noteListProps {
   editIndex: number;
   editText: string;
   handleSaveEdit: (id: number) => void;
+  setSearchValue: (value: string) => void;
 }
 
 const Notes: React.FC<noteListProps> = ({
@@ -23,12 +24,21 @@ const Notes: React.FC<noteListProps> = ({
   editIndex,
   editText,
   handleSaveEdit,
+  setSearchValue,
 }) => {
   return (
     <div className="animate-fadeIn">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-6">
-        📝 Your Notes
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-6">
+          📝 Your Notes
+        </h2>
+        <input
+          type="search"
+          placeholder="Search notes..."
+          className="w-1/4 p-2 border border-gray-300 rounded-lg mt-4"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+      </div>
       {notes.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
           <p className="text-lg font-medium">

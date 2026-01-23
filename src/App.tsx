@@ -8,6 +8,10 @@ const App = () => {
   const [notes, setNotes] = useState<NoteObj[]>([]);
   const [editIndex, setEditIndex] = useState<number>(0);
   const [editText, setEditText] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>("");
+  // const [perPage, setPerPage] = useState<number>(0);
+  // const [currentData, setCurrentData] = useState<NoteObj[]>([]);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (sessionStorage.getItem("notes")) {
@@ -54,6 +58,31 @@ const App = () => {
     setEditText("");
   };
 
+  useEffect(() => {
+    const filteredNotes = notes.filter((note) =>
+      note.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    if (searchValue === "") {
+      if (sessionStorage.getItem("notes")) {
+        setNotes(JSON.parse(sessionStorage.getItem("notes") as string));
+        return;
+      }
+    } else {
+      setNotes(filteredNotes);
+    }
+    console.log(filteredNotes, "filteredNotes");
+  }, [searchValue]);
+
+  // useEffect(() => {
+  //   const start = (currentPage - 1) * perPage;
+  //   const end = start + perPage;
+  //   setCurrentData(notes.slice(start, end));
+  // }, [perPage, currentPage]);
+
+  // const totalPages =
+
+  // console.log(currentData)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f7fa] to-[#f0f4ff]">
       <Header />
@@ -68,6 +97,7 @@ const App = () => {
           editIndex={editIndex}
           editText={editText}
           handleSaveEdit={handleSaveEdit}
+          setSearchValue={setSearchValue}
         />
       </div>
     </div>
