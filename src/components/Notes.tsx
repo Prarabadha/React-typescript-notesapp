@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NoteObj } from "../modals/note";
 import NoteList from "./NoteList";
 
@@ -26,6 +27,26 @@ const Notes: React.FC<noteListProps> = ({
   handleSaveEdit,
   setSearchValue,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const notesPerPage = 9;
+
+  const totalPages = Math.ceil(notes.length / notesPerPage);
+  const startIndex = (currentPage - 1) * notesPerPage;
+  const endIndex = startIndex + notesPerPage;
+  const paginatedNotes = notes.slice(startIndex, endIndex);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div className="animate-fadeIn">
       <div className="flex justify-between items-center">
@@ -46,21 +67,46 @@ const Notes: React.FC<noteListProps> = ({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 py-5 animate-slideUp">
-          {notes.map((note) => (
-            <NoteList
-              key={note.id}
-              note={note}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              handleCancelEdit={handleCancelEdit}
-              onValueChange={onValueChange}
-              editIndex={editIndex}
-              editText={editText}
-              handleSaveEdit={handleSaveEdit}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 py-5 animate-slideUp">
+            {paginatedNotes.map((note) => (
+              <NoteList
+                key={note.id}
+                note={note}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                handleCancelEdit={handleCancelEdit}
+                onValueChange={onValueChange}
+                editIndex={editIndex}
+                editText={editText}
+                handleSaveEdit={handleSaveEdit}
+              />
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          <div className="flex justify-center items-center gap-4  mb-6">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            >
+              ← Prev
+            </button>
+
+            <span className="text-gray-700 font-semibold">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            >
+              Next →
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
