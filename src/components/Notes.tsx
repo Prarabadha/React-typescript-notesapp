@@ -35,7 +35,7 @@ const Notes: React.FC<noteListProps> = ({
         <input
           type="search"
           placeholder="Search notes..."
-          className="w-1/4 p-2 border border-gray-300 rounded-lg mt-4"
+          className="w-[300px] p-2 border border-gray-300 rounded-lg mt-4"
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
