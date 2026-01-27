@@ -73,7 +73,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f7fa] to-[#f0f4ff]">
       <Header />
-      <div className="flex gap-[60px] py-8 max-w-7xl mx-auto animate-fadeIn">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-[60px] py-6 lg:py-8 max-w-7xl mx-auto animate-fadeIn px-4 lg:px-0">
         <CreateNote addNotes={addNotes} />
         <Notes
           notes={notes}
