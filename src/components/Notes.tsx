@@ -28,7 +28,7 @@ const Notes: React.FC<noteListProps> = ({
   setSearchValue,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const notesPerPage = 9;
+  const notesPerPage = 6;
 
   const totalPages = Math.ceil(notes.length / notesPerPage);
   const startIndex = (currentPage - 1) * notesPerPage;
@@ -63,7 +63,7 @@ const Notes: React.FC<noteListProps> = ({
       </div>
 
       {notes.length === 0 ? (
-        <div className="text-center py-12 sm:py-16 text-gray-400">
+        <div className="text-center py-12 sm:py-16 text-gray-400 h-[400px] flex flex-col justify-center items-center gap-4">
           <p className="text-base sm:text-lg font-medium">
             No notes yet. Create one to get started! ✨
           </p>
@@ -71,20 +71,22 @@ const Notes: React.FC<noteListProps> = ({
       ) : (
         <>
           {/* Notes Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 py-4 sm:py-5 animate-slideUp">
-            {paginatedNotes.map((note) => (
-              <NoteList
-                key={note.id}
-                note={note}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit}
-                handleCancelEdit={handleCancelEdit}
-                onValueChange={onValueChange}
-                editIndex={editIndex}
-                editText={editText}
-                handleSaveEdit={handleSaveEdit}
-              />
-            ))}
+          <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 py-4 sm:py-5 animate-slideUp">
+              {paginatedNotes.map((note) => (
+                <NoteList
+                  key={note.id}
+                  note={note}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  handleCancelEdit={handleCancelEdit}
+                  onValueChange={onValueChange}
+                  editIndex={editIndex}
+                  editText={editText}
+                  handleSaveEdit={handleSaveEdit}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Pagination Controls */}
